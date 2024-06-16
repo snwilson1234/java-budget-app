@@ -1,1 +1,1 @@
-# java-app
+# java-budget-app
