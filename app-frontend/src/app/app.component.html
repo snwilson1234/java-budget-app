@@ -1,0 +1,21 @@
+<!--how we can subscribe to the observable to access its data:-->
+<!-- <div>{{ appState$ | async | json }}</div> -->
+
+<ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
+  <ng-container *ngSwitchCase="DataState.LOADING_STATE">
+    <p>
+      Loading...
+    </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="DataState.LOADED_STATE">
+    <ng-container *ngIf="categories">
+      <ul>
+        <li *ngFor="let cat of categories">{{cat.name}}</li>
+      </ul>
+    </ng-container>
+  </ng-container>
+
+</ng-container>
+
+

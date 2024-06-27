@@ -1,4 +1,8 @@
+# custom
 HELP.md
+
+application.yaml
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
