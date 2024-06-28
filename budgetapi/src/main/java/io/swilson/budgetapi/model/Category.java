@@ -19,9 +19,11 @@ public class Category {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
+
     @NotEmpty(message = "name cannot be empty")
     @Column(length = 30, nullable = false)
     private String name;
+
     private Integer budget;
     //TODO: add purchases
 }
