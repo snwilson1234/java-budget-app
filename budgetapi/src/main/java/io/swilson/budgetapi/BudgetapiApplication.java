@@ -1,7 +1,10 @@
 package io.swilson.budgetapi;
 
 import io.swilson.budgetapi.model.Category;
+import io.swilson.budgetapi.model.Purchase;
 import io.swilson.budgetapi.repo.CategoryRepo;
+import io.swilson.budgetapi.repo.PurchaseRepo;
+import io.swilson.budgetapi.service.implementation.CategoryServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,7 +13,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class BudgetapiApplication {
@@ -19,16 +24,21 @@ public class BudgetapiApplication {
 		SpringApplication.run(BudgetapiApplication.class, args);
 	}
 
-	// when we start the app, we will have some things save in the db:
+	/*
+		This allows us to run the application.
+	*/
+
 	@Bean
-	CommandLineRunner run(CategoryRepo categoryRepo) {
+	CommandLineRunner run(CategoryRepo categoryRepo, PurchaseRepo purchaseRepo, CategoryServiceImpl categoryService) {
 		return args -> {
-			categoryRepo.save(new Category(null, "Groceries", 300));
-			categoryRepo.save(new Category(null, "Bills", 1000));
-			categoryRepo.save(new Category(null, "Extra", 200));
+			categoryRepo.save(new Category(null, "sample", 1000, new ArrayList<>()));
 		};
 	}
 
+	/*
+		This configures a CORS Filter for the site to allow frontend clients to communicate with the backend api services,
+		since they occur across two different ports.
+	*/
 	@Bean
 	public CorsFilter corsFilter() {
 		UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
