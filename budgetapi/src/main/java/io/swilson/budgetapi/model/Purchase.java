@@ -6,7 +6,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+
+/*
+    Purchase model.
+
+    id: primary key
+    description: a short message to describe the purchase
+    amount: the total amount of the purchase
+    date: the date the purchase occurred, in the format "YYYY-MM-DD"
+    category: the category this purchase belongs to
+
+*/
+
+@Entity(name = "Purchase")
+@Table(name = "purchase")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +32,6 @@ public class Purchase {
     @Column(length = 80, nullable = false)
     private String description;
 
-    @NotEmpty(message = "amount cannot be empty")
     @Column(nullable = false)
     private int amount;
 
@@ -27,5 +39,7 @@ public class Purchase {
     @Column(length = 10, nullable = false)
     private String date;
 
-    //TODO: add relationship to category
+    @ManyToOne
+    @JoinColumn(name="category_id", nullable = false)
+    private Category category;
 }
