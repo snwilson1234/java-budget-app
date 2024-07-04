@@ -3,9 +3,6 @@ import { MatListModule } from '@angular/material/list';
 import { CommonModule } from "@angular/common";
 import { Category } from "../../interface/category";
 import { ApiService } from "../../service/api.service";
-import { Observable, catchError, startWith } from "rxjs";
-import { AppState } from "../../interface/app-state";
-import { CustomResponse } from "../../interface/custom-response";
 
 @Component({
     selector: 'home-page',

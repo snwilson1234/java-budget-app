@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router, RouterOutlet } from '@angular/router';
-import { Observable, catchError, map, of, startWith } from 'rxjs';
+import { RouterOutlet } from '@angular/router';
+import { Observable } from 'rxjs';
 import { CategoryService } from './service/category.service';
 import { AppState } from './interface/app-state';
 import { CustomResponse } from './interface/custom-response';
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   categories: Array<Category> = [];
   currentPage: Page = Page.HOME_PAGE;
 
-  inCategory: Category = {id: 1, name: "sample", budget: 1500};
+  inCategory: Category = {id: 1, name: "PLACEHOLDER", budget: 0};
 
   constructor( 
     private http: HttpClient,
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  openCatPage(cat: Category) {
+  handleCatPageEvent(cat: Category) {
     this.currentPage = Page.CATEGORY_PAGE;
     this.inCategory = cat;
   }
