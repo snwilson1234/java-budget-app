@@ -1,7 +1,7 @@
 <!--how we can subscribe to the observable to access its data:-->
 <!-- <div>{{ appState$ | async | json }}</div> -->
 
-<ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
+<!-- <ng-container *ngIf="(appState$ | async) as appState" [ngSwitch]="appState.dataState">
   <ng-container *ngSwitchCase="DataState.LOADING_STATE">
     <p>
       Loading...
@@ -16,6 +16,17 @@
     </ng-container>
   </ng-container>
 
-</ng-container>
+</ng-container> -->
+<div id="app-container" class="app-container">
+  <ng-container *ngIf="currentPage === Page.HOME_PAGE; then home else noHome"></ng-container>
 
+  <ng-template #home>
+    <home-page>
+      
+    </home-page>
+  </ng-template>
+  <ng-template #noHome>
+    category
+  </ng-template>  
 
+</div>

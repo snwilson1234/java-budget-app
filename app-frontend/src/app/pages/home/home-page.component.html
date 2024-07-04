@@ -1,0 +1,17 @@
+<div class="main-container">
+    <div class="temp-header">
+        <h2>Budget Application</h2>
+    </div>
+    <ng-container *ngIf="categories.length > 0; then showlist else nolist"></ng-container>
+    <ng-template #showlist>
+        <mat-list #categoriesList>
+            <mat-list-item 
+            *ngFor="let cat of categories"
+            (click)="onSelectCategory(cat)"
+            > {{ cat.name }}</mat-list-item>
+        </mat-list>
+    </ng-template>
+    <ng-template #nolist>
+        <span>There was an error fetching your categories.</span>
+    </ng-template>
+</div>

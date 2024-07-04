@@ -8,6 +8,8 @@ import { AppState } from './interface/app-state';
 import { CustomResponse } from './interface/custom-response';
 import { DataState } from './enum/data-state.enum';
 import { Category } from './interface/category';
+import { Page } from './enum/page.enum';
+import { HomePageComponent } from './pages/home/home-page.component';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +17,7 @@ import { Category } from './interface/category';
   imports: [
     CommonModule,
     RouterOutlet,
+    HomePageComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -23,7 +26,9 @@ export class AppComponent implements OnInit {
   title = 'app-frontend';
   appState$!: Observable<AppState<CustomResponse>>;
   readonly DataState = DataState;
+  readonly Page = Page;
   categories: Array<Category> = [];
+  currentPage: Page = Page.HOME_PAGE;
 
   constructor( 
     private http: HttpClient,
