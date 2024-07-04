@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from "@angular/common";
 import { Category } from "../../interface/category";
@@ -21,6 +21,8 @@ import { CustomResponse } from "../../interface/custom-response";
     ]
 })
 export class HomePageComponent implements OnInit {
+
+    @Output() openCategoryPageEvent = new EventEmitter<Category>();
 
     categories: Category[] = [];
     
@@ -50,6 +52,7 @@ export class HomePageComponent implements OnInit {
 
     onSelectCategory(category: Category) {
         console.log("selected:", category.name);
+        this.openCategoryPageEvent.emit(category);
     }
 
 }

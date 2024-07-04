@@ -1,0 +1,7 @@
+<ng-container *ngIf="category then showMessage; else noMessage"></ng-container>
+<ng-template #showMessage>
+    <h1>welcome to {{ category?.name }} Page!!! </h1>
+</ng-template>
+<ng-template #noMessage>
+    <h1>there was an error.</h1>
+</ng-template>

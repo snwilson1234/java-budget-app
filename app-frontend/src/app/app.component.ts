@@ -10,6 +10,7 @@ import { DataState } from './enum/data-state.enum';
 import { Category } from './interface/category';
 import { Page } from './enum/page.enum';
 import { HomePageComponent } from './pages/home/home-page.component';
+import { CategoryPageComponent } from './pages/category/category-page.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ import { HomePageComponent } from './pages/home/home-page.component';
   imports: [
     CommonModule,
     RouterOutlet,
-    HomePageComponent
+    HomePageComponent,
+    CategoryPageComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -30,26 +32,29 @@ export class AppComponent implements OnInit {
   categories: Array<Category> = [];
   currentPage: Page = Page.HOME_PAGE;
 
+  inCategory: Category = {id: 1, name: "sample", budget: 1500};
+
   constructor( 
     private http: HttpClient,
     private categoryService: CategoryService,
   ) {}
 
   ngOnInit(): void {
-    this.appState$ = this.categoryService.categories$
-    .pipe(
-      map(response => {
-        if (response['data']['categories']) {
-          this.categories = response['data']['categories'];
-        }
-        this.categories = response['data']['categories'];
-        return { dataState: DataState.LOADED_STATE, appData: response }
-      }),
-      startWith({ dataState: DataState.LOADING_STATE }),
-      catchError((error: string) => {
-        return of({ dataState: DataState.ERROR_STATE, error })
-      })
-    );
+    
+  }
+
+  switchContext() {
+    if (this.currentPage == Page.HOME_PAGE) {
+      this.currentPage = Page.CATEGORY_PAGE;
+    }
+    else {
+      this.currentPage = Page.HOME_PAGE;
+    }
+  }
+
+  openCatPage(cat: Category) {
+    this.currentPage = Page.CATEGORY_PAGE;
+    this.inCategory = cat;
   }
    
   }

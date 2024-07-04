@@ -6,43 +6,19 @@
    margin: 0;
    padding: 0;
 
-   .temp-header {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-   }
-
    .mat-mdc-list {
     border-top: solid 1px white;
     border-bottom: solid 1px white;
     
     .mat-mdc-list-item {
+
         &:hover{
             background-color: rgb(255, 255, 255, 0.25);
             cursor: pointer;
         }
+
     }
 
    }
-
-    // .cat-list {
-    //     display: flex;
-    //     flex-direction: column;
-
-    //     li {
-    //         margin: 0;
-    //         padding: 0;
-    //         list-style: none;
-    //         line-height: 1;
-    //         .cat-list-item {
-    //             display: flex;
-    //             flex-direction: row;
-    //             gap: 10px;
-                
-    //             h4 {
-    //                 display: none;
-    //             }
-    //         }
-    //     }
-    // }
+   
 }

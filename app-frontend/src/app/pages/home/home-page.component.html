@@ -1,7 +1,4 @@
 <div class="main-container">
-    <div class="temp-header">
-        <h2>Budget Application</h2>
-    </div>
     <ng-container *ngIf="categories.length > 0; then showlist else nolist"></ng-container>
     <ng-template #showlist>
         <mat-list #categoriesList>
