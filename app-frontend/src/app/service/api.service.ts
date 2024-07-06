@@ -16,8 +16,8 @@ export class ApiService {
         return this.http.get(`${this.apiUrl}/categories/`);
     }
 
-    public makeCategory(category: Category): Observable<any> {
-        return this.http.post<Category>(`${this.apiUrl}/category/`, category);
+    public postCategory (category: any): Observable<any> {
+        return this.http.post<Category>(`${this.apiUrl}/categories/`, category);
     }
 
     handleError(handleError: any): Observable<never> {

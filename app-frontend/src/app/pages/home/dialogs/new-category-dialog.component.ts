@@ -28,6 +28,9 @@ export class NewCategoryDialogComponent {
 
     makeNewCategory() {
         console.log("clicked submit");
-        
+        this.dialogRef.close({
+            name: this.newCategoryForm.get('name')?.value,
+            budget: this.newCategoryForm.get('budget')?.value
+        });   
     }
 }

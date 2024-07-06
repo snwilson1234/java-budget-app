@@ -58,11 +58,28 @@ export class HomePageComponent implements OnInit {
         this.openCategoryPageEvent.emit(category);
     }
 
-    onCreateNewCategory() {
+    onOpenNewCategoryDialog() {
         console.log("Attempting to open new category dialog...");
-        this.dialog.open(NewCategoryDialogComponent, {
+        let dialogRef = this.dialog.open(NewCategoryDialogComponent, {
             width: '50%',
             height: '50%',
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            this.apiService.postCategory({
+                name: result.name,
+                budget: result.budget
+            }).subscribe({
+                next: (data) => {
+                    console.log("Successfully created new category.");
+                },
+                error: (e) => {
+                    console.error(e);
+                },
+                complete: () => {
+                    console.log("Attempted to fetch categories.");
+                }
+            })
         })
     }
 
