@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { CustomResponse } from '../interface/custom-response';
+import { Category } from '../interface/category';
 
 
 @Injectable({ providedIn: 'root'})
@@ -11,15 +12,12 @@ export class ApiService {
     // inject HttpClient into category service
     constructor(private http: HttpClient) { }
 
-    // categories$ = <Observable<CustomResponse>>
-    // this.http.get<CustomResponse>(`${this.apiUrl}/categories/`)
-    // .pipe(
-    //     tap(console.log),
-    //     catchError(this.handleError)
-    // );
-
     public getCategories(): Observable<any> {
         return this.http.get(`${this.apiUrl}/categories/`);
+    }
+
+    public makeCategory(category: Category): Observable<any> {
+        return this.http.post<Category>(`${this.apiUrl}/category/`, category);
     }
 
     handleError(handleError: any): Observable<never> {

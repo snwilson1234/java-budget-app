@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CategoryService } from './service/category.service';
 import { AppState } from './interface/app-state';
 import { CustomResponse } from './interface/custom-response';
 import { DataState } from './enum/data-state.enum';
@@ -36,7 +35,6 @@ export class AppComponent implements OnInit {
 
   constructor( 
     private http: HttpClient,
-    private categoryService: CategoryService,
   ) {}
 
   ngOnInit(): void {

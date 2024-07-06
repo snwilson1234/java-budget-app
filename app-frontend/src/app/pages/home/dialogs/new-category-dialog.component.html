@@ -1,0 +1,23 @@
+<!-- TODO: add validation -->
+<div class="dialog-container">
+    <h2>Create New Category</h2>
+    <form 
+        [formGroup]="newCategoryForm"
+        (ngSubmit)="makeNewCategory()"
+        class="dialog-form"
+    >
+        <div class="dialog-form-item">
+            <label for="name">Name: </label>
+            <input id="name" type="text" formControlName="name">
+        </div>
+        <div class="dialog-form-item">
+            <label for="budget">Budget: </label>
+            <input id="budget" type="text" formControlName="budget">
+        </div>
+        <button
+            mat-flat-button
+            type="submit"
+            [disabled]="!newCategoryForm.valid"
+        >Submit</button>
+    </form>
+</div>
