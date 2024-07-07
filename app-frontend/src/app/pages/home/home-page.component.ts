@@ -78,7 +78,7 @@ export class HomePageComponent implements OnInit {
                     console.error(e);
                 },
                 complete: () => {
-                    console.log("Attempted to fetch categories.");
+                    console.log("Attempted to post new category.");
                 }
             })
         })

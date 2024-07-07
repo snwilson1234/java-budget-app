@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { CustomResponse } from '../interface/custom-response';
 import { Category } from '../interface/category';
+import { Purchase } from '../interface/purchase';
 
 
 @Injectable({ providedIn: 'root'})
@@ -16,6 +17,10 @@ export class ApiService {
     //Purchases
     public getPurchases(): Observable<any> {
         return this.http.get(`${this.apiUrl}/purchases/`)
+    }
+
+    public postPurchase(purchase: any): Observable<any> {
+        return this.http.post<Purchase>(`${this.apiUrl}/purchases/`, purchase);
     }
 
     // Categories

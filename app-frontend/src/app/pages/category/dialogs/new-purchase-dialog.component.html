@@ -1,0 +1,27 @@
+<!-- TODO: add validation -->
+<div class="dialog-container">
+    <h2>Create New Purchase</h2>
+    <form 
+        [formGroup]="newPurchaseForm"
+        (ngSubmit)="makeNewPurchase()"
+        class="dialog-form"
+    >
+        <div class="dialog-form-item">
+            <label for="description">Description: </label>
+            <input id="description" type="text" formControlName="description">
+        </div>
+        <div class="dialog-form-item">
+            <label for="amount">Amount: </label>
+            <input id="amount" type="text" formControlName="amount">
+        </div>
+        <div class="dialog-form-item">
+            <label for="date">Date: </label>
+            <input id="date" type="text" formControlName="date">
+        </div>
+        <button
+            mat-flat-button
+            type="submit"
+            [disabled]="!newPurchaseForm.valid"
+        >Submit</button>
+    </form>
+</div>

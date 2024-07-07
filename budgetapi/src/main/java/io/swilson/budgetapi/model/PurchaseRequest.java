@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
 @Data
-//@SuperBuilder //use the builder pattern
-//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PurchaseRequest {
     @NotEmpty(message = "description cannot be empty")
     protected String description;

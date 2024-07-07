@@ -3,17 +3,22 @@
 
 <ng-template #showContent>
     <div class="main-container">
-    <div *ngIf="category" class="pur-list-header"><h2>Purchases for {{category.name}}</h2></div>
-    <div *ngIf="purchases">
-        <mat-list>
-            <mat-list-item *ngFor="let pur of purchases">
-                <div class="pur-list-item-content">
-                    <div><h3>{{ pur.description }}</h3></div>
-                    <div><h3 style="color: lightgray;">${{ pur.amount }}.00</h3></div>
-                </div>
-            </mat-list-item>
-        </mat-list>
-    </div>
+        <div *ngIf="category" class="pur-list-header"><h2>Purchases for {{category.name}}</h2></div>
+        <div *ngIf="purchases">
+            <mat-list>
+                <mat-list-item *ngFor="let pur of purchases">
+                    <div class="pur-list-item-content">
+                        <div><h3>{{ pur.description }}</h3></div>
+                        <div><h3 style="color: lightgray;">${{ pur.amount }}.00</h3></div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <button
+            mat-flat-button
+            id="btn-new-purchase"
+            (click)="onOpenNewPurchaseDialog()"
+        >Add New Purchase</button>
     </div>
 </ng-template>
 
