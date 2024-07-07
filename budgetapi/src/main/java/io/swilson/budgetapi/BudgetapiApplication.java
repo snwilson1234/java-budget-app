@@ -31,7 +31,13 @@ public class BudgetapiApplication {
 	@Bean
 	CommandLineRunner run(CategoryRepo categoryRepo, PurchaseRepo purchaseRepo, CategoryServiceImpl categoryService) {
 		return args -> {
-			categoryRepo.save(new Category(null, "sample", 1000, new ArrayList<>()));
+			// Some sample database entries
+			Category category = new Category(null, "sample", 1000, new ArrayList<>());
+			Purchase purchase1 = new Purchase(null, "describe", 250, "2024-06-20", category);
+			Purchase purchase2 = new Purchase(null, "egg", 300, "2024-06-21", category);
+			categoryRepo.save(category);
+			purchaseRepo.save(purchase1);
+			purchaseRepo.save(purchase2);
 		};
 	}
 

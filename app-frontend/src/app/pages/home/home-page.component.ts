@@ -40,7 +40,7 @@ export class HomePageComponent implements OnInit {
     getCats() {
         this.apiService.getCategories().subscribe({
             next: (data) => {
-                console.log("Received:", data['data']['categories']);
+                console.log("Received:", data);
                 this.categories = data['data']['categories'];
             },
             error: (e) => {

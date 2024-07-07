@@ -1,5 +1,6 @@
 package io.swilson.budgetapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -43,9 +44,6 @@ public class Category {
 
     private Integer budget;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "category")
     private List<Purchase> purchases = new ArrayList<>();
 }

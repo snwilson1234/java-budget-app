@@ -11,9 +11,20 @@ export class ApiService {
 
     // inject HttpClient into category service
     constructor(private http: HttpClient) { }
+    
 
+    //Purchases
+    public getPurchases(): Observable<any> {
+        return this.http.get(`${this.apiUrl}/purchases/`)
+    }
+
+    // Categories
     public getCategories(): Observable<any> {
         return this.http.get(`${this.apiUrl}/categories/`);
+    }
+
+    public getCategory(category_id: number): Observable<any> {
+        return this.http.get(`${this.apiUrl}/categories/${category_id}`)
     }
 
     public postCategory (category: any): Observable<any> {

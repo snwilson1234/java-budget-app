@@ -31,9 +31,9 @@ export class AppComponent implements OnInit {
   readonly DataState = DataState;
   readonly Page = Page;
   categories: Array<Category> = [];
-  currentPage: Page = Page.CATEGORY_PAGE;
+  currentPage: Page = Page.HOME_PAGE;
 
-  inCategory: Category = {id: 1, name: "PLACEHOLDER", budget: 0};
+  inCategory: Category = {id: 1, name: "PLACEHOLDER", budget: 0, purchases: []};
 
   constructor( 
     private http: HttpClient,

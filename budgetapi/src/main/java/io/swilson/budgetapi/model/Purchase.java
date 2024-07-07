@@ -1,5 +1,6 @@
 package io.swilson.budgetapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -41,5 +42,6 @@ public class Purchase {
 
     @ManyToOne
     @JoinColumn(name="category_id", nullable = false)
+    @JsonIgnore // IMPORTANT: prevents recursion in serialization
     private Category category;
 }
