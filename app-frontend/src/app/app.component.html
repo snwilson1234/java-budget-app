@@ -1,13 +1,21 @@
 <div id="app-container" class="app-container">
   <div class="temp-header">
+    <div>
+      <h2>Temp</h2>
+    </div>
     <h2>Budget Application</h2>
     
     <!-- Only show the return button when we are not on home page. -->
-    <ng-container *ngIf="currentPage === Page.CATEGORY_PAGE then homeBtn"></ng-container>
+    <ng-container *ngIf="currentPage === Page.CATEGORY_PAGE; then homeBtn else noBtn"></ng-container>
     <ng-template #homeBtn>
-      <button
+      <button mat-flat-button
         (click)="switchContext()"
       >Return To Homepage</button>
+    </ng-template>
+    <ng-template #noBtn>
+      <div>
+        <h2>Home</h2>
+      </div>
     </ng-template>
 
   </div>

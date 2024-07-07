@@ -10,6 +10,7 @@ import { Category } from './interface/category';
 import { Page } from './enum/page.enum';
 import { HomePageComponent } from './pages/home/home-page.component';
 import { CategoryPageComponent } from './pages/category/category-page.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ import { CategoryPageComponent } from './pages/category/category-page.component'
     CommonModule,
     RouterOutlet,
     HomePageComponent,
-    CategoryPageComponent
+    CategoryPageComponent,
+    MatButtonModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -29,7 +31,7 @@ export class AppComponent implements OnInit {
   readonly DataState = DataState;
   readonly Page = Page;
   categories: Array<Category> = [];
-  currentPage: Page = Page.HOME_PAGE;
+  currentPage: Page = Page.CATEGORY_PAGE;
 
   inCategory: Category = {id: 1, name: "PLACEHOLDER", budget: 0};
 
