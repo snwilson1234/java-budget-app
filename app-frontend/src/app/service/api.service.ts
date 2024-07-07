@@ -6,25 +6,19 @@ import { Category } from '../interface/category';
 
 
 @Injectable({ providedIn: 'root'})
-export class CategoryService {
+export class ApiService {
     private readonly apiUrl = 'http://localhost:8080';
 
     // inject HttpClient into category service
     constructor(private http: HttpClient) { }
 
-    categories$ = <Observable<CustomResponse>>
-    this.http.get<CustomResponse>(`${this.apiUrl}/categories/`)
-    .pipe(
-        tap(console.log),
-        catchError(this.handleError)
-    );
+    public getCategories(): Observable<any> {
+        return this.http.get(`${this.apiUrl}/categories/`);
+    }
 
-    // save$ = (category: Category) => <Observable<CustomResponse>>
-    // this.http.post<CustomResponse>(`${this.apiUrl}/category/save`, category)
-    // .pipe(
-    //     tap(console.log),
-    //     catchError(this.handleError)
-    // );
+    public postCategory (category: any): Observable<any> {
+        return this.http.post<Category>(`${this.apiUrl}/categories/`, category);
+    }
 
     handleError(handleError: any): Observable<never> {
         return throwError(() => new Error('Method not implemented.'))
