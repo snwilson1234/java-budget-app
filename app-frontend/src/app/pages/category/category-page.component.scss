@@ -1,0 +1,26 @@
+.main-container {
+    .pur-list-header {
+        display: flex;
+        flex-direction: row;
+        width: 97%;
+        justify-content: space-between;
+    }
+
+    .mat-mdc-list {
+        width: 100%;
+        border-top: solid 1px white;
+        border-bottom: solid 1px white;
+
+        .mat-mdc-list-item {
+            .pur-list-item-content {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            &:hover{
+                background-color: rgb(255, 255, 255, 0.25);
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,8 +1,22 @@
-<ng-container *ngIf="category && category.name && category.budget then showMessage else noMessage"></ng-container>
-<ng-template #showMessage>
-    <h1>welcome to {{ category?.name }} Page!!! </h1>
-    <button (click)="getPurchases(category?.id)">Click me</button>
+<ng-container 
+    *ngIf="category then showContent else noContent"></ng-container>
+
+<ng-template #showContent>
+    <div class="main-container">
+    <div *ngIf="category" class="pur-list-header"><h2>Purchases for {{category.name}}</h2></div>
+    <div *ngIf="purchases">
+        <mat-list>
+            <mat-list-item *ngFor="let pur of purchases">
+                <div class="pur-list-item-content">
+                    <div><h3>{{ pur.description }}</h3></div>
+                    <div><h3 style="color: lightgray;">${{ pur.amount }}.00</h3></div>
+                </div>
+            </mat-list-item>
+        </mat-list>
+    </div>
+    </div>
 </ng-template>
-<ng-template #noMessage>
-    <h1>there was an error.</h1>
+
+<ng-template #noContent>
+    <div>There was an error fetching the page for this category.</div>
 </ng-template>
