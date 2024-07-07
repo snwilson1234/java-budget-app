@@ -2,11 +2,24 @@
     <ng-container *ngIf="categories.length > 0; then showlist else nolist"></ng-container>
     <ng-template #showlist>
         <div class="categories-container">
+            <div class="cat-list-header">
+                <div>
+                    <h3>Name</h3>
+                </div>
+                <div>
+                    <h3>Budget</h3>
+                </div>
+            </div>
             <mat-list #categoriesList>
                 <mat-list-item 
                 *ngFor="let cat of categories"
                 (click)="onSelectCategory(cat)"
-                > {{ cat.name }}</mat-list-item>
+                >
+                <div class="cat-list-item-content">
+                    <div><h3>{{ cat.name }}</h3></div>
+                    <div><h3 style="color: lightgray;">${{ cat.budget }}.00</h3></div>
+                </div>
+                </mat-list-item>
             </mat-list>
             <button 
                 mat-flat-button

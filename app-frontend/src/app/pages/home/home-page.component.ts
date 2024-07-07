@@ -72,6 +72,7 @@ export class HomePageComponent implements OnInit {
             }).subscribe({
                 next: (data) => {
                     console.log("Successfully created new category.");
+                    this.getCats();
                 },
                 error: (e) => {
                     console.error(e);
