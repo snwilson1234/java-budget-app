@@ -3,13 +3,19 @@
 
 <ng-template #showContent>
     <div class="main-container">
-        <div *ngIf="category" class="pur-list-header"><h2>Purchases for {{category.name}}</h2></div>
+        <div *ngIf="category" class="pur-list-header"><h2>Purchases for Category: {{category.name}}</h2></div>
         <div *ngIf="purchases">
             <mat-list>
                 <mat-list-item *ngFor="let pur of purchases">
                     <div class="pur-list-item-content">
-                        <div><h3>{{ pur.description }}</h3></div>
-                        <div><h3 style="color: lightgray;">${{ pur.amount }}.00</h3></div>
+                        <h3>{{ pur.description }}</h3>
+                        <h3 style="color: lightgray;">${{ pur.amount }}.00</h3>
+                        <button 
+                            mat-mini-fab
+                            class="btn-delete-purchase"
+                            (click)="onDeletePurchase(pur)">
+                            <fa-icon size="2x" [icon]="faCircleXmark"></fa-icon>
+                        </button>
                     </div>
                 </mat-list-item>
             </mat-list>

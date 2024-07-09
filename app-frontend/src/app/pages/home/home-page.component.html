@@ -21,14 +21,14 @@
                 </div>
                 </mat-list-item>
             </mat-list>
-            <button 
-                mat-flat-button
-                id="btn-new-category"
-                (click)="onOpenNewCategoryDialog()"
-            >Create New Category</button>
         </div>
     </ng-template>
     <ng-template #nolist>
         <span>There was an error fetching your categories.</span>
     </ng-template>
+    <button 
+        mat-flat-button
+        id="btn-new-category"
+        (click)="onOpenNewCategoryDialog()"
+    >Create New Category</button>
 </div>

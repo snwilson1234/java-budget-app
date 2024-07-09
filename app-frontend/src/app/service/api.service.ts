@@ -23,6 +23,10 @@ export class ApiService {
         return this.http.post<Purchase>(`${this.apiUrl}/purchases/`, purchase);
     }
 
+    public deletePurchase(purchase: any): Observable<any> {
+        return this.http.delete<Purchase>(`${this.apiUrl}/purchases/${purchase.id}`, purchase);
+    }
+
     // Categories
     public getCategories(): Observable<any> {
         return this.http.get(`${this.apiUrl}/categories/`);

@@ -6,6 +6,8 @@ import { Purchase } from "../../interface/purchase";
 import { MatListModule } from "@angular/material/list";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialog } from "@angular/material/dialog";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { faCoffee, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { NewPurchaseDialogComponent } from "./dialogs/new-purchase-dialog.component";
 
 @Component({
@@ -14,7 +16,8 @@ import { NewPurchaseDialogComponent } from "./dialogs/new-purchase-dialog.compon
     imports: [
         CommonModule,
         MatListModule,
-        MatButtonModule
+        MatButtonModule,
+        FontAwesomeModule
     ],
     templateUrl: './category-page.component.html',
     styleUrl: './category-page.component.scss',
@@ -24,6 +27,9 @@ export class CategoryPageComponent implements OnInit {
 
     @Input() category!: Category;
     purchases: Array<Purchase> = [];
+
+    faCoffee = faCoffee;
+    faCircleXmark = faCircleXmark;
 
     readonly dialog = inject(MatDialog);
 
@@ -51,7 +57,7 @@ export class CategoryPageComponent implements OnInit {
             complete: () => {
                 console.log(`Attempted to fetch purchases for category ${category_id}.`);
             }
-        })
+        });
     }
 
     onOpenNewPurchaseDialog() {
@@ -84,5 +90,21 @@ export class CategoryPageComponent implements OnInit {
                 }
             })
         })
+    }
+
+    onDeletePurchase(purchase: Purchase) {
+       this.apiService.deletePurchase(purchase).subscribe({
+        next: (data) => {
+            console.log(`Successfully deleted purchase`);
+            this.getPurchases(this.category.id);
+        },
+        error: (e) => {
+            console.error(e);
+        },
+        complete: () => {
+            console.log(`Attempted to delete purchase ${purchase.id}`);
+        }
+
+       });
     }
 }
