@@ -31,6 +31,17 @@
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
+                    color: white;
+                    align-items: center;
+                    .btn-delete-category {
+                        background-color: transparent;
+                        border: none;
+                        box-shadow: none;
+    
+                        fa-icon {
+                            color: darkred;
+                        }
+                    }
                 }
                 &:hover{
                     background-color: rgb(255, 255, 255, 0.25);

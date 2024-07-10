@@ -16,8 +16,14 @@
                 (click)="onSelectCategory(cat)"
                 >
                 <div class="cat-list-item-content">
-                    <div><h3>{{ cat.name }}</h3></div>
-                    <div><h3 style="color: lightgray;">${{ cat.budget }}.00</h3></div>
+                    <h3>{{ cat.name }}</h3>
+                    <h3 style="color: lightgray;">${{ cat.budget }}.00</h3>
+                    <button 
+                        mat-mini-fab
+                        class="btn-delete-category"
+                        (click)="onDeleteCategory($event, cat)">
+                        <fa-icon size="2x" [icon]="faCircleXmark"></fa-icon>
+                    </button>
                 </div>
                 </mat-list-item>
             </mat-list>

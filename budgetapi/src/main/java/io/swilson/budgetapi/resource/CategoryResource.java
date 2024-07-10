@@ -2,12 +2,16 @@ package io.swilson.budgetapi.resource;
 
 import io.swilson.budgetapi.model.Category;
 import io.swilson.budgetapi.model.CategoryRequest;
+import io.swilson.budgetapi.model.Purchase;
 import io.swilson.budgetapi.model.Response;
 import io.swilson.budgetapi.service.CategoryService;
+import io.swilson.budgetapi.service.PurchaseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static java.time.LocalDateTime.now;
 import static java.util.Map.*;
@@ -18,6 +22,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 public class CategoryResource {
     private final CategoryService categoryService;
+    private final PurchaseService purchaseService;
 
     @PostMapping(value = "/", consumes = "application/json")
     public ResponseEntity<Response> createCategory(@RequestBody @Valid CategoryRequest categoryRequest) {
@@ -62,8 +67,12 @@ public class CategoryResource {
         );
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteCategory(@PathVariable("id") Long id) {
+        List<Purchase> purchases = categoryService.get(id).getPurchases();
+        for (int i = 0; i < purchases.size(); i++) {
+            purchaseService.delete(purchases.get(i).getId());
+        }
         categoryService.delete(id);
         return ResponseEntity.ok(
                 Response.builder()

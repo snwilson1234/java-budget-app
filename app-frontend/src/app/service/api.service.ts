@@ -40,6 +40,10 @@ export class ApiService {
         return this.http.post<Category>(`${this.apiUrl}/categories/`, category);
     }
 
+    public deleteCategory(category_id: number): Observable<any> {
+        return this.http.delete<Category>(`${this.apiUrl}/categories/${category_id}`)
+    }
+
     handleError(handleError: any): Observable<never> {
         return throwError(() => new Error('Method not implemented.'))
     }

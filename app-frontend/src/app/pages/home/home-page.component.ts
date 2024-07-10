@@ -5,7 +5,9 @@ import { Category } from "../../interface/category";
 import { ApiService } from "../../service/api.service";
 import { MatButtonModule } from "@angular/material/button"
 import { MatDialog } from "@angular/material/dialog";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { NewCategoryDialogComponent } from "./dialogs/new-category-dialog.component";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @Component({
     selector: 'home-page',
@@ -14,6 +16,7 @@ import { NewCategoryDialogComponent } from "./dialogs/new-category-dialog.compon
         CommonModule,
         MatListModule,
         MatButtonModule,
+        FontAwesomeModule
     ],
     templateUrl: './home-page.component.html',
     styleUrl: './home-page.component.scss',
@@ -28,6 +31,8 @@ export class HomePageComponent implements OnInit {
     readonly dialog = inject(MatDialog);
 
     categories: Category[] = [];
+
+    faCircleXmark = faCircleXmark;
     
     constructor(
         private apiService: ApiService
@@ -56,6 +61,23 @@ export class HomePageComponent implements OnInit {
     onSelectCategory(category: Category) {
         console.log("selected:", category.name);
         this.openCategoryPageEvent.emit(category);
+    }
+
+    onDeleteCategory(event: Event, category: Category) {
+        console.log("trying to delete category", category.id);
+        this.apiService.deleteCategory(category.id).subscribe({
+            next: (data) => {
+                console.log("successfully deleted category");
+                this.getCats();
+            },
+            error: (e) => {
+                console.error(e);
+            },
+            complete: () => {
+                console.log("attempted to delete category.");
+            }
+        });
+        event.stopPropagation();
     }
 
     onOpenNewCategoryDialog() {
