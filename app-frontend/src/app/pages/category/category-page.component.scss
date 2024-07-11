@@ -1,0 +1,41 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    row-gap: 10px;
+    .pur-list-header {
+        display: flex;
+        flex-direction: row;
+        width: 97%;
+        justify-content: center;
+    }
+
+    .mat-mdc-list {
+        width: 100%;
+        border-top: solid 1px white;
+        border-bottom: solid 1px white;
+
+        .mat-mdc-list-item {
+            .pur-list-item-content {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                color: white;
+                align-items: center;
+                .btn-delete-purchase {
+                    background-color: transparent;
+                    border: none;
+                    box-shadow: none;
+
+                    fa-icon {
+                        color: darkred;
+                    }
+                }
+            }
+            &:hover {
+                background-color: rgb(255, 255, 255, 0.25);
+                cursor: pointer;
+            }
+        }
+    }
+}

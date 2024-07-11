@@ -31,7 +31,6 @@ public class BudgetapiApplication {
 	@Bean
 	CommandLineRunner run(CategoryRepo categoryRepo, PurchaseRepo purchaseRepo, CategoryServiceImpl categoryService) {
 		return args -> {
-			categoryRepo.save(new Category(null, "sample", 1000, new ArrayList<>()));
 		};
 	}
 
