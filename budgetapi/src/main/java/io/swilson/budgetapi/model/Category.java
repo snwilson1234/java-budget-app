@@ -45,5 +45,6 @@ public class Category {
     private Integer budget;
 
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private List<Purchase> purchases = new ArrayList<>();
 }

@@ -1,10 +1,5 @@
 package io.swilson.budgetapi;
 
-import io.swilson.budgetapi.model.Category;
-import io.swilson.budgetapi.model.Purchase;
-import io.swilson.budgetapi.repo.CategoryRepo;
-import io.swilson.budgetapi.repo.PurchaseRepo;
-import io.swilson.budgetapi.service.implementation.CategoryServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,9 +8,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication
 public class BudgetapiApplication {
@@ -29,7 +22,7 @@ public class BudgetapiApplication {
 	*/
 
 	@Bean
-	CommandLineRunner run(CategoryRepo categoryRepo, PurchaseRepo purchaseRepo, CategoryServiceImpl categoryService) {
+	CommandLineRunner run() {
 		return args -> {
 		};
 	}
