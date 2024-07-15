@@ -1,8 +1,21 @@
-.temp-header {
+.app-container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    flex-direction: column;
+    padding: 10px;
+
+    .temp-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .app-logo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            fa-icon {
+                color: white;
+            }
+        }
+    }
 }

@@ -3,5 +3,6 @@ export interface Purchase {
     description: string,
     amount: number,
     date: string,
-    category_id: number
+    category_id: number,
+    overBudget: boolean
 }

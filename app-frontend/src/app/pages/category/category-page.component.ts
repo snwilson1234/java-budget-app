@@ -27,6 +27,7 @@ export class CategoryPageComponent implements OnInit {
 
     @Input() category!: Category;
     purchases: Array<Purchase> = [];
+    overages: Array<number> = [];
 
     faCoffee = faCoffee;
     faCircleXmark = faCircleXmark;
@@ -38,6 +39,7 @@ export class CategoryPageComponent implements OnInit {
     ngOnInit(): void {
         if (this.category){
             this.getPurchases(this.category.id);
+            this.getOverages(this.category.id);
         }
     }
 
@@ -60,6 +62,23 @@ export class CategoryPageComponent implements OnInit {
         });
     }
 
+    getOverages(category_id: number) {
+        this.apiService.getOverages(category_id).subscribe({
+            next: (data) => {
+                console.log("Received", data['data']['overages']);
+                this.overages = data['data']['overages'];
+            },
+            error: (e) => {
+                console.error(e);
+                this.overages = []
+            },
+            complete: () => {
+                console.log("Attempted to fetch overages.")
+            }
+
+        })
+    }
+
     onOpenNewPurchaseDialog() {
         console.log("Attempting to open new purchase dialog...");
         let dialogRef = this.dialog.open(NewPurchaseDialogComponent, {
@@ -80,6 +99,7 @@ export class CategoryPageComponent implements OnInit {
                     console.log("Successfully created a new purchase.");
                     if (this.category) {
                         this.getPurchases(this.category.id);
+                        this.getOverages(this.category.id);
                     }
                 },
                 error: (e) => {

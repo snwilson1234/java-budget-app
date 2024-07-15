@@ -56,6 +56,8 @@ public class CategoryResource {
 
     @GetMapping("/{id}")
     public ResponseEntity<Response> getCategory(@PathVariable("id") Long id) {
+        CategoryDTO categoryDTO = categoryService.get(id);
+        categoryDTO.purchases().sort(new PurchaseComparator());
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
@@ -96,5 +98,12 @@ public class CategoryResource {
                         .statusCode(OK.value())
                         .build()
         );
+    }
+}
+
+class PurchaseComparator implements java.util.Comparator<Purchase> {
+    @Override
+    public int compare(Purchase a, Purchase b) {
+        return a.getDate().compareTo(b.getDate());
     }
 }

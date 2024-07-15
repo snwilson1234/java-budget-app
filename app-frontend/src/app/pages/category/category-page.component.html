@@ -3,16 +3,36 @@
 
 <ng-template #showContent>
     <div class="main-container">
-        <div *ngIf="category" class="pur-list-header"><h2>Purchases for Category: {{category.name}}</h2></div>
-        <div *ngIf="purchases">
+        <div *ngIf="category" class="pur-list-header">
+            <h2>{{category.name}}</h2>
+            <h2>Budget: ${{ category.budget }}.00</h2>
+        </div>
+        <div *ngIf="purchases.length > 0">
             <mat-list>
-                <mat-list-item *ngFor="let pur of purchases">
+                <mat-list-item>
+                    <div class="pur-list-header-item-content">
+                        <p class="pur-list-item-text"><u>Description</u></p>
+                        <p class="pur-list-item-text"><u>Amount</u></p>
+                        <p class="pur-list-item-text"><u>Date</u></p>
+                        <p class="pur-list-item-text"><u>Delete?</u></p>
+                    </div>
+                </mat-list-item>
+                <br>
+                <mat-list-item
+                    *ngFor="let pur of purchases"
+                    >
                     <div class="pur-list-item-content">
-                        <h3>{{ pur.description }}</h3>
-                        <h3 style="color: lightgray;">${{ pur.amount }}.00</h3>
+                        <p class="pur-list-item-text">{{ pur.description }}</p>
+                        <p 
+                            class="pur-list-item-text"
+                            [ngClass]="{'over-budget': overages.includes(pur.id)}"
+                        >
+                        <b>${{ pur.amount }}.00</b></p>
+                        <p class="pur-list-item-text">{{ pur.date }}</p>
                         <button 
                             mat-mini-fab
                             class="btn-delete-purchase"
+                            style="width: 25%;"
                             (click)="onDeletePurchase(pur)">
                             <fa-icon size="2x" [icon]="faCircleXmark"></fa-icon>
                         </button>
@@ -20,6 +40,7 @@
                 </mat-list-item>
             </mat-list>
         </div>
+        <div style="color: white; text-align: center;" *ngIf="purchases.length <= 0 ">No purchases added to this category yet.</div>
         <button
             mat-flat-button
             id="btn-new-purchase"
