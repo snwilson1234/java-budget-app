@@ -1,9 +1,7 @@
 package io.swilson.budgetapi.resource;
 
-import io.swilson.budgetapi.model.Category;
-import io.swilson.budgetapi.model.CategoryRequest;
-import io.swilson.budgetapi.model.Purchase;
-import io.swilson.budgetapi.model.Response;
+import io.swilson.budgetapi.model.*;
+import io.swilson.budgetapi.repo.CategoryRepo;
 import io.swilson.budgetapi.service.CategoryService;
 import io.swilson.budgetapi.service.PurchaseService;
 import jakarta.validation.Valid;
@@ -11,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 import static java.time.LocalDateTime.now;
@@ -23,6 +22,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class CategoryResource {
     private final CategoryService categoryService;
     private final PurchaseService purchaseService;
+    private final CategoryRepo categoryRepo;
 
     @PostMapping(value = "/", consumes = "application/json")
     public ResponseEntity<Response> createCategory(@RequestBody @Valid CategoryRequest categoryRequest) {
@@ -30,7 +30,7 @@ public class CategoryResource {
         category.setName(categoryRequest.getName());
         category.setBudget(categoryRequest.getBudget());
 
-        Category createdCategory = categoryService.create(category);
+        categoryService.create(category);
 
         return ResponseEntity.ok(
                 Response.builder()
@@ -56,6 +56,8 @@ public class CategoryResource {
 
     @GetMapping("/{id}")
     public ResponseEntity<Response> getCategory(@PathVariable("id") Long id) {
+        CategoryDTO categoryDTO = categoryService.get(id);
+        categoryDTO.purchases().sort(new PurchaseComparator());
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
@@ -69,7 +71,7 @@ public class CategoryResource {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteCategory(@PathVariable("id") Long id) {
-        List<Purchase> purchases = categoryService.get(id).getPurchases();
+        List<Purchase> purchases = categoryService.get(id).purchases();
         for (int i = 0; i < purchases.size(); i++) {
             purchaseService.delete(purchases.get(i).getId());
         }
@@ -82,5 +84,26 @@ public class CategoryResource {
                         .statusCode(OK.value())
                         .build()
         );
+    }
+
+    @GetMapping("/{id}/overages")
+    public ResponseEntity<Response> getOverages(@PathVariable("id") Long id) {
+        Collection<Long> overageIds = categoryService.getOverages(id);
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("overages", overageIds))
+                        .message("Successfully retrieved overage ids.")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+}
+
+class PurchaseComparator implements java.util.Comparator<Purchase> {
+    @Override
+    public int compare(Purchase a, Purchase b) {
+        return a.getDate().compareTo(b.getDate());
     }
 }

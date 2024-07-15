@@ -44,6 +44,11 @@ export class ApiService {
         return this.http.delete<Category>(`${this.apiUrl}/categories/${category_id}`)
     }
 
+    // Overages
+    public getOverages(category_id: number): Observable<any> {
+        return this.http.get(`${this.apiUrl}/categories/${category_id}/overages`)
+    }
+
     handleError(handleError: any): Observable<never> {
         return throwError(() => new Error('Method not implemented.'))
     }

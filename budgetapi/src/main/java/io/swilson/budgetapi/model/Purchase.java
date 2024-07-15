@@ -42,6 +42,6 @@ public class Purchase {
 
     @ManyToOne
     @JoinColumn(name="category_id", nullable = false)
-    @JsonIgnore // IMPORTANT: prevents recursion in serialization
+    @JsonIgnore
     private Category category;
 }

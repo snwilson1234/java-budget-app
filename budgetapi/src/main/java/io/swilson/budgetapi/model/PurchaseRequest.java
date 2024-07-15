@@ -1,10 +1,8 @@
 package io.swilson.budgetapi.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.experimental.SuperBuilder;
 
 @Data
 public class PurchaseRequest {

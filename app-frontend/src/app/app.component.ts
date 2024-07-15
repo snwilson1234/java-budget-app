@@ -11,6 +11,8 @@ import { Page } from './enum/page.enum';
 import { HomePageComponent } from './pages/home/home-page.component';
 import { CategoryPageComponent } from './pages/category/category-page.component';
 import { MatButtonModule } from '@angular/material/button';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faSackDollar } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-root',
@@ -20,7 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
     RouterOutlet,
     HomePageComponent,
     CategoryPageComponent,
-    MatButtonModule
+    MatButtonModule,
+    FontAwesomeModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -32,6 +35,8 @@ export class AppComponent implements OnInit {
   readonly Page = Page;
   categories: Array<Category> = [];
   currentPage: Page = Page.HOME_PAGE;
+
+  faSackDollar = faSackDollar;
 
   inCategory: Category = {id: 1, name: "PLACEHOLDER", budget: 0, purchases: []};
 

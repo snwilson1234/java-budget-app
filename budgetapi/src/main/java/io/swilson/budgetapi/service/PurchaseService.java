@@ -1,17 +1,18 @@
 package io.swilson.budgetapi.service;
 
 import io.swilson.budgetapi.model.Purchase;
+import io.swilson.budgetapi.model.PurchaseDTO;
 
 import java.util.Collection;
 
 public interface PurchaseService {
-    Purchase create(Purchase purchase);
+    PurchaseDTO create(Purchase purchase);
 
-    Collection<Purchase> list(int limit);
+    Collection<PurchaseDTO> list(int limit);
 
-    Purchase get(Long id);
+    PurchaseDTO get(Long id);
 
-    Purchase update(Purchase purchase);
+    void update(Purchase purchase);
 
     Boolean delete(Long id);
 }

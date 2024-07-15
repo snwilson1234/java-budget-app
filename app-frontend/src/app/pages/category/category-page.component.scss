@@ -3,11 +3,12 @@
     flex-direction: column;
     width: 100%;
     row-gap: 10px;
+    
     .pur-list-header {
         display: flex;
         flex-direction: row;
-        width: 97%;
-        justify-content: center;
+        width: 100%;
+        justify-content: space-between;
     }
 
     .mat-mdc-list {
@@ -16,12 +17,31 @@
         border-bottom: solid 1px white;
 
         .mat-mdc-list-item {
+            .pur-list-header-item-content {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                color: white;
+                align-items: center;
+                text-align: center;
+                .pur-list-item-text {
+                    width: 25%;
+                }
+            }
+
             .pur-list-item-content {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 color: white;
                 align-items: center;
+                text-align: center;
+                .pur-list-item-text {
+                    width: 25%;
+                }
+                .over-budget {
+                    color: red;
+                }
                 .btn-delete-purchase {
                     background-color: transparent;
                     border: none;
@@ -31,11 +51,12 @@
                         color: darkred;
                     }
                 }
+                &:hover {
+                    background-color: rgb(255, 255, 255, 0.25);
+                    cursor: pointer;
+                }
             }
-            &:hover {
-                background-color: rgb(255, 255, 255, 0.25);
-                cursor: pointer;
-            }
+            
         }
     }
 }
