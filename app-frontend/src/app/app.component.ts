@@ -28,8 +28,6 @@ export class AppComponent implements OnInit {
   readonly Page = Page;
   categories: Array<Category> = [];
 
-  inCategory!: number;
-
   constructor( 
     private http: HttpClient,
   ) {}

@@ -6,7 +6,8 @@ import { CategoryPageComponent } from './pages/category/category-page.component'
 export const routes: Routes = [
     { 
         path: '',
-        component: AppComponent,
+        redirectTo: '/homePage',
+        pathMatch: 'full'
     },
     {
         path: 'homePage',
