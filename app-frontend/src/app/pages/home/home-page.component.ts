@@ -8,7 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { NewCategoryDialogComponent } from "./dialogs/new-category-dialog.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-
+import { ActivatedRoute, Router } from "@angular/router";
 @Component({
     selector: 'home-page',
     standalone: true,
@@ -26,7 +26,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 })
 export class HomePageComponent implements OnInit {
 
-    @Output() openCategoryPageEvent = new EventEmitter<Category>();
+    @Output() openCategoryPageEvent = new EventEmitter<number>();
 
     readonly dialog = inject(MatDialog);
 
@@ -35,7 +35,9 @@ export class HomePageComponent implements OnInit {
     faCircleXmark = faCircleXmark;
     
     constructor(
-        private apiService: ApiService
+        private apiService: ApiService,
+        private route: ActivatedRoute,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -60,7 +62,7 @@ export class HomePageComponent implements OnInit {
 
     onSelectCategory(category: Category) {
         console.log("selected:", category.name);
-        this.openCategoryPageEvent.emit(category);
+        this.router.navigate(['/categoryPage', { categoryId: category.id}]);
     }
 
     onDeleteCategory(event: Event, category: Category) {

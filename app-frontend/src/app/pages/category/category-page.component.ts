@@ -9,6 +9,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faCoffee, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { NewPurchaseDialogComponent } from "./dialogs/new-purchase-dialog.component";
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'category-page',
@@ -24,8 +26,9 @@ import { NewPurchaseDialogComponent } from "./dialogs/new-purchase-dialog.compon
     providers: [],
 })
 export class CategoryPageComponent implements OnInit {
-
-    @Input() category!: Category;
+    
+    @Input() categoryId!: number;
+    category!: Category;
     purchases: Array<Purchase> = [];
     overages: Array<number> = [];
 
@@ -34,12 +37,16 @@ export class CategoryPageComponent implements OnInit {
 
     readonly dialog = inject(MatDialog);
 
-    constructor(private apiService: ApiService) {}
+    constructor(
+        private apiService: ApiService,
+        private route: ActivatedRoute,
+        private router: Router
+    ) {}
 
     ngOnInit(): void {
-        if (this.category){
-            this.getPurchases(this.category.id);
-            this.getOverages(this.category.id);
+        if (this.categoryId){
+            this.getPurchases(this.categoryId);
+            this.getOverages(this.categoryId);
         }
     }
 
@@ -51,6 +58,7 @@ export class CategoryPageComponent implements OnInit {
             next: (data) => {
                 console.log("Received", data['data']['category']['purchases']);
                 this.purchases = data['data']['category']['purchases'];
+                this.category = data['data']['category'];
             },
             error: (e) => {
                 console.error(e);
@@ -84,7 +92,7 @@ export class CategoryPageComponent implements OnInit {
         let dialogRef = this.dialog.open(NewPurchaseDialogComponent, {
             width: '50%',
             height: '50%',
-            data: { category_id: this.category.id }
+            data: { category_id: this.categoryId }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -93,13 +101,13 @@ export class CategoryPageComponent implements OnInit {
                 description: result.description,
                 amount: result.amount,
                 date: result.date,
-                categoryId: this.category.id
+                categoryId: this.categoryId
             }).subscribe({
                 next: (data) => {
                     console.log("Successfully created a new purchase.");
-                    if (this.category) {
-                        this.getPurchases(this.category.id);
-                        this.getOverages(this.category.id);
+                    if (this.categoryId) {
+                        this.getPurchases(this.categoryId);
+                        this.getOverages(this.categoryId);
                     }
                 },
                 error: (e) => {
@@ -116,7 +124,7 @@ export class CategoryPageComponent implements OnInit {
        this.apiService.deletePurchase(purchase).subscribe({
         next: (data) => {
             console.log(`Successfully deleted purchase`);
-            this.getPurchases(this.category.id);
+            this.getPurchases(this.categoryId);
         },
         error: (e) => {
             console.error(e);
