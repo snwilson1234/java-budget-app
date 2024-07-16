@@ -1,0 +1,18 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .app-logo {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        fa-icon {
+            color: white;
+        }
+    }
+}
